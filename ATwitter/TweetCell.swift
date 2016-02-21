@@ -35,6 +35,7 @@ class TweetCell: UITableViewCell {
                     print("Something went wrong with the image load")
                 }
             )
+            ageLabel.text = tweet?.age()
             setFavoritedImage()
         }
     }

@@ -6,6 +6,7 @@
 //  Copyright © 2016 Jeremiah Lee. All rights reserved.
 //
 
+import SwiftDate
 import SwiftyJSON
 import UIKit
 
@@ -35,8 +36,8 @@ class Tweet: NSObject {
         }
     }
 
-    func age() {
-
+    func age() -> String {
+        return createdAt!.toRelativeString(abbreviated: true, maxUnits: 1)!
     }
 
     func invertFavorite(completion: () -> ()) {
