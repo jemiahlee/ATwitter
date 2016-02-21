@@ -40,13 +40,13 @@ class TweetCell: UITableViewCell {
     }
 
     func setFavoritedImage() {
-        //if tweet!.isFavorited {
+        if tweet!.isFavorited {
             print("Attempting to set the image to be the red heart")
-            favoriteButton.imageView!.image = UIImage(named: "images/like-action-on.png")
-//        } else {
-  //          print("Attempting to set the image to be the grey heart")
-    //        favoriteButton.imageView!.image = UIImage(named: "images/like-action.png")
-      //  }
+            favoriteButton.imageView!.image = UIImage(named: "like-action-on.png")
+        } else {
+            print("Attempting to set the image to be the grey heart")
+            favoriteButton.imageView!.image = UIImage(named: "like-action.png")
+        }
     }
 
     @IBAction func replyToTweet(sender: AnyObject) {

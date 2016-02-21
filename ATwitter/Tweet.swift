@@ -51,7 +51,7 @@ class Tweet: NSObject {
             TwitterClient.sharedInstance.setTweetAsFavorite(self.id!) { (updatedTweet: Tweet?, error: NSError?) -> Void in
                 if updatedTweet != nil {
                     self.isFavorited = (updatedTweet?.isFavorited)!
-                    print("Setting Tweet to \(self.isFavorited)")
+                      print("Setting Tweet to \(self.isFavorited)")
                 }
             }
         }
