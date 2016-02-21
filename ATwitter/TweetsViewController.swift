@@ -11,6 +11,7 @@ import UIKit
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tweets: [Tweet]?
+    var refreshControl: UIRefreshControl!
 
     @IBOutlet weak var tweetTable: UITableView!
 
@@ -22,10 +23,18 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tweetTable.rowHeight = UITableViewAutomaticDimension
 
         navigationController?.navigationBarHidden = false
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
+        tweetTable.insertSubview(refreshControl, atIndex: 0)
 
+        refreshData(self)
+    }
+
+    func refreshData(sender: AnyObject) {
         TwitterClient.sharedInstance.homeTimelineWithCompletion() { (tweets: [Tweet]?, error: NSError?) -> Void in
             self.tweets = tweets
             self.tweetTable.reloadData()
+            self.refreshControl.endRefreshing()
         }
     }
 

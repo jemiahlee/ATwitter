@@ -12,8 +12,6 @@ import UIKit
 class TweetCell: UITableViewCell {
 
     @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var retweetImageView: UIImageView!
-    @IBOutlet weak var retweetedLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
     @IBOutlet weak var screennameLabel: UILabel!
