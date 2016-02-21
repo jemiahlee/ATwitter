@@ -41,19 +41,10 @@ class Tweet: NSObject {
     }
 
     func invertFavorite(completion: () -> ()) {
-        if self.isFavorited {
-            TwitterClient.sharedInstance.setTweetFavorite(self.id!, favorited: false) { (updatedTweet: Tweet?, error: NSError?) -> Void in
-                if updatedTweet != nil {
-                    self.isFavorited = (updatedTweet?.isFavorited)!
-                    print("Setting Tweet to \(self.isFavorited)")
-                }
-            }
-        } else {
-            TwitterClient.sharedInstance.setTweetFavorite(self.id!, favorited: true) { (updatedTweet: Tweet?, error: NSError?) -> Void in
-                if updatedTweet != nil {
-                    self.isFavorited = (updatedTweet?.isFavorited)!
-                      print("Setting Tweet to \(self.isFavorited)")
-                }
+        TwitterClient.sharedInstance.setTweetFavorite(self.id!, favorited: !self.isFavorited) { (updatedTweet: Tweet?, error: NSError?) -> Void in
+            if updatedTweet != nil {
+                self.isFavorited = (updatedTweet?.isFavorited)!
+                print("Setting Tweet.isFavorited to \(self.isFavorited)")
             }
         }
         completion()
