@@ -21,6 +21,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tweetTable.estimatedRowHeight = 100
         tweetTable.rowHeight = UITableViewAutomaticDimension
 
+        navigationController?.navigationBarHidden = false
+
         TwitterClient.sharedInstance.homeTimelineWithCompletion() { (tweets: [Tweet]?, error: NSError?) -> Void in
             self.tweets = tweets
             self.tweetTable.reloadData()
