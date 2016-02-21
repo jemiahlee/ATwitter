@@ -39,10 +39,11 @@ class TwitterClient: BDBOAuth1SessionManager {
         loginCompletion = completion
         
         requestSerializer.removeAccessToken()
-        fetchRequestTokenWithPath("oauth/request_token", method: "GET", callbackURL: NSURL(string: "cptwitterdemo://oauth"), scope: nil, success: { (requestToken: BDBOAuth1Credential!) -> Void in
-            print("Got the request token")
-            let authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
-            UIApplication.sharedApplication().openURL(authURL!)
+        fetchRequestTokenWithPath("oauth/request_token", method: "GET", callbackURL: NSURL(string: "cptwitterdemo://oauth"), scope: nil,
+            success: { (requestToken: BDBOAuth1Credential!) -> Void in
+                print("Got the request token")
+                let authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
+                UIApplication.sharedApplication().openURL(authURL!)
             }) { (error: NSError!) -> Void in
                 print("failed to get request token")
         }
@@ -52,36 +53,37 @@ class TwitterClient: BDBOAuth1SessionManager {
         fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: url.query), success: { (accessToken: BDBOAuth1Credential!) -> Void in
             self.requestSerializer.saveAccessToken(accessToken)
 
-            self.GET("1.1/account/verify_credentials.json", parameters: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
-                let user = User(dictionary: JSON(response!))
-                User.currentUser = user
-                self.loginCompletion?(user: user, error: nil)
-            }, failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
-                self.loginCompletion?(user: nil, error: error)
-            })
+            self.GET("1.1/account/verify_credentials.json", parameters: nil,
+                success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                    let user = User(dictionary: JSON(response!))
+                    User.currentUser = user
+                    self.loginCompletion?(user: user, error: nil)
+                },
+                failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
+                    self.loginCompletion?(user: nil, error: error)
+                }
+            )
         }, failure: { (error: NSError!) -> Void in
             print("Error: Did not get the access token")
         })
     }
 
-    func setTweetAsFavorite(id: Int, completion: (tweet: Tweet?, error: NSError?) -> ()) {
-        self.POST("1.1/favorites/create.json", parameters: ["id": id], success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
-            let tweet = Tweet(dictionary: JSON(response!))
-            print("Tweet is now set to \(tweet.dictionary)")
-            completion(tweet: tweet, error: nil)
-            }, failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
-                completion(tweet: nil, error: error)
-        })
-    }
+    func setTweetFavorite(id: Int, favorited: Bool, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        var favorite_url = "1.1/favorites/create.json"
 
-    func setTweetAsNotFavorite(id: Int, completion: (tweet: Tweet?, error: NSError?) -> ()) {
-        self.POST("1.1/favorites/destroy.json", parameters: ["id": id], success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
-            let tweet = Tweet(dictionary: JSON(response!))
-            print("Tweet is now set to \(tweet.dictionary)")
-            completion(tweet: tweet, error: nil)
-            }, failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
+        if !favorited {
+            favorite_url = "1.1/favorites/destroy.json"
+        }
+
+        self.POST(favorite_url, parameters: ["id": id],
+            success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                let tweet = Tweet(dictionary: JSON(response!))
+                completion(tweet: tweet, error: nil)
+            },
+            failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
                 completion(tweet: nil, error: error)
-        })
+            }
+        )
     }
 
 }

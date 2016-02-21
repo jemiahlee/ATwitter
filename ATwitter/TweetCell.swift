@@ -42,10 +42,10 @@ class TweetCell: UITableViewCell {
     func setFavoritedImage() {
         if tweet!.isFavorited {
             print("Attempting to set the image to be the red heart")
-            favoriteButton.imageView!.image = UIImage(named: "like-action-on.png")
+            favoriteButton.setImage(UIImage(named: "like-action-on.png"), forState: .Normal)
         } else {
             print("Attempting to set the image to be the grey heart")
-            favoriteButton.imageView!.image = UIImage(named: "like-action.png")
+            favoriteButton.setImage(UIImage(named: "like-action.png"), forState: .Normal)
         }
     }
 
