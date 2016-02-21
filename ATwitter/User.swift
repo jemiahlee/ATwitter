@@ -17,7 +17,7 @@ let userDidLogoutNotification = "userDidLogoutNotification"
 class User: NSObject {
     var name: String?
     var screenname: String?
-    var profileImageURL: String?
+    var profileImageURL: NSURL?
     var tagline: String?
     var dictionary: JSON?
 
@@ -26,7 +26,7 @@ class User: NSObject {
 
         name = dictionary["name"].stringValue
         screenname = dictionary["screen_name"].stringValue
-        profileImageURL = dictionary["profile_image_url"].stringValue
+        profileImageURL = NSURL(string: dictionary["profile_image_url"].stringValue)!
         tagline = dictionary["description"].stringValue
     }
 
@@ -44,6 +44,7 @@ class User: NSObject {
                     _currentUser = User(dictionary: json)
                 }
             }
+
             return _currentUser
         }
         set(user) {

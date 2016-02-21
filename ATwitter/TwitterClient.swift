@@ -29,6 +29,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         self.GET("1.1/statuses/home_timeline.json", parameters: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
             let tweets = Tweet.tweetsFromJSON(JSON(response!))
             completion(tweets: tweets, error: nil)
+            print(tweets[0].dictionary)
             }, failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
                 completion(tweets: nil, error: error)
         })
@@ -62,4 +63,25 @@ class TwitterClient: BDBOAuth1SessionManager {
             print("Error: Did not get the access token")
         })
     }
+
+    func setTweetAsFavorite(id: Int, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        self.POST("1.1/favorites/create.json", parameters: ["id": id], success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let tweet = Tweet(dictionary: JSON(response!))
+            print("Tweet is now set to \(tweet.dictionary)")
+            completion(tweet: tweet, error: nil)
+            }, failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
+                completion(tweet: nil, error: error)
+        })
+    }
+
+    func setTweetAsNotFavorite(id: Int, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        self.POST("1.1/favorites/destroy.json", parameters: ["id": id], success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let tweet = Tweet(dictionary: JSON(response!))
+            print("Tweet is now set to \(tweet.dictionary)")
+            completion(tweet: tweet, error: nil)
+            }, failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
+                completion(tweet: nil, error: error)
+        })
+    }
+
 }
