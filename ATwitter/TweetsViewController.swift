@@ -57,6 +57,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
         cell.tweet = tweets![indexPath.row]
+        cell.controller = self
         return cell
     }
 
@@ -70,8 +71,9 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             vc.tweet = tweets![indexPath!.row]
         }
         else if segue.identifier == "toCreateTweetDetailSegue" {
-            print("Would segue to CreateTweetViewController")
-            // let vc = segue.destinationViewController as! CreateTweetViewController
+            let vc = segue.destinationViewController as! CreateTweetViewController
+            let indexPath = tweetTable.indexPathForCell(sender as! UITableViewCell)
+            vc.tweet = tweets![indexPath!.row]
         }
     }
 

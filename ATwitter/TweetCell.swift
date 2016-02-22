@@ -20,6 +20,8 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var replyButton: UIButton!
 
+    var controller: TweetsViewController?
+
     var tweet: Tweet? {
         didSet {
             tweetLabel.text = tweet?.text
@@ -66,7 +68,9 @@ class TweetCell: UITableViewCell {
     }
 
     @IBAction func replyToTweet(sender: AnyObject) {
-            // performSegueWithIdentifier("toCreateTweetDetailSegue", sender: self)
+        if controller != nil {
+            controller?.performSegueWithIdentifier("toCreateTweetDetailSegue", sender: self)
+        }
     }
 
     @IBAction func retweetTweet(sender: AnyObject) {
