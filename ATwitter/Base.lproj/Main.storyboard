@@ -21,6 +21,10 @@
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29O-GA-7mx">
                                 <rect key="frame" x="197" y="176" width="206" height="41"/>
                                 <color key="backgroundColor" red="0.44512642299999999" green="0.80545886889999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="fMM-ky-9hA"/>
+                                    <constraint firstAttribute="width" constant="206" id="qUy-CD-NGH"/>
+                                </constraints>
                                 <state key="normal" title="Login with Twitter">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -37,10 +41,13 @@
                             <constraint firstItem="29O-GA-7mx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="197" id="eEz-df-2oj"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="fzx-Fw-FNH" kind="show" identifier="loginSegue" id="ao6-EK-FnL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1174" y="510"/>
+            <point key="canvasLocation" x="1702" y="538"/>
         </scene>
         <!--ATwitter-->
         <scene sceneID="CAS-87-MUR">
@@ -608,9 +615,12 @@
                     <connections>
                         <outlet property="avatarImageView" destination="kS5-7q-ke9" id="hi5-Ws-Vwd"/>
                         <outlet property="dateLabel" destination="7fU-28-N3L" id="M8m-Wk-r3O"/>
+                        <outlet property="favoriteButton" destination="yH2-qE-lLb" id="CVm-Fa-kki"/>
                         <outlet property="favoriteCountLabel" destination="I4i-jq-B39" id="gzA-Ca-3sa"/>
                         <outlet property="favoriteLabel" destination="ZaU-4n-HZr" id="7nR-GQ-qUX"/>
                         <outlet property="nameLabel" destination="CMQ-Xd-fPM" id="Az2-9E-00W"/>
+                        <outlet property="replyButton" destination="BZ4-Xa-xrk" id="2Tq-M7-v1B"/>
+                        <outlet property="retweetButton" destination="fyu-TP-rca" id="ceV-nI-uoV"/>
                         <outlet property="retweetCountLabel" destination="pEu-pI-mfY" id="XSy-cv-CGR"/>
                         <outlet property="retweetsLabel" destination="ev5-FB-JOe" id="1xj-IP-XHj"/>
                         <outlet property="screennameLabel" destination="ekQ-mJ-cf5" id="dV6-M6-JQo"/>
@@ -647,6 +657,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="S21-vW-fmL"/>
-        <segue reference="mTE-Qm-6vK"/>
+        <segue reference="g3S-nu-PwC"/>
     </inferredMetricsTieBreakers>
 </document>

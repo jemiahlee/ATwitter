@@ -64,12 +64,13 @@ class Tweet: NSObject {
     func invertRetweet(completion: () -> ()) {
         TwitterClient.sharedInstance.retweet(self, completion: { (newTweet: Tweet?, error: NSError?) -> Void in
             if newTweet != nil {
-                self.isRetweeted = !self.isRetweeted
                 if self.isRetweeted {
-                    self.retweetCount += 1
+                    self.isRetweeted = false
+                    self.retweetCount -= 1
                 }
                 else {
-                    self.retweetCount -= 1
+                    self.isRetweeted = true
+                    self.retweetCount += 1
                 }
             }
         })
