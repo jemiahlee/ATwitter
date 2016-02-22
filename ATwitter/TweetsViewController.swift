@@ -22,7 +22,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tweetTable.estimatedRowHeight = 100
         tweetTable.rowHeight = UITableViewAutomaticDimension
 
-        navigationController?.navigationBarHidden = false
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
         tweetTable.insertSubview(refreshControl, atIndex: 0)
@@ -52,10 +51,22 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let backButton = UIBarButtonItem(title: "Back", style: .Bordered, target: self, action: "refreshData:")
+        self.navigationItem.backBarButtonItem = backButton;
 
-    /*
+        if segue.identifier == "toTweetDetailSegue" {
+            let vc = segue.destinationViewController as! TweetDetailViewController
+            let indexPath = tweetTable.indexPathForCell(sender as! UITableViewCell)
+            vc.tweet = tweets![indexPath!.row]
+        }
+        else if segue.identifier == "toCreateTweetDetailSegue" {
+            print("Would segue to CreateTweetViewController")
+            // let vc = segue.destinationViewController as! CreateTweetViewController
+        }
+    }
+
     @IBAction func onLogout(sender: AnyObject) {
         User.currentUser?.logout()
-    }*/
-
+    }
 }
