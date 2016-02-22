@@ -34,17 +34,24 @@ class TweetCell: UITableViewCell {
                 }
             )
             ageLabel.text = tweet?.age()
-            setFavoritedImage()
+
+            if (tweet?.isFavorited)! {
+                favoriteButton.setImage(UIImage(named: "like-action-on.png"), forState: .Normal)
+            } else {
+                favoriteButton.setImage(UIImage(named: "like-action.png"), forState: .Normal)
+            }
+
+            if (tweet?.isRetweeted)! {
+                
+            }
         }
     }
 
     func setFavoritedImage() {
-        if tweet!.isFavorited {
-            print("Attempting to set the image to be the red heart")
-            favoriteButton.setImage(UIImage(named: "like-action-on.png"), forState: .Normal)
-        } else {
-            print("Attempting to set the image to be the grey heart")
+        if (tweet?.isFavorited)! {
             favoriteButton.setImage(UIImage(named: "like-action.png"), forState: .Normal)
+        } else {
+            favoriteButton.setImage(UIImage(named: "like-action-on.png"), forState: .Normal)
         }
     }
 
@@ -56,7 +63,6 @@ class TweetCell: UITableViewCell {
 
     @IBAction func favoriteTweet(sender: AnyObject) {
         tweet!.invertFavorite() { () -> Void in
-            print("calling setFavoritedImage")
             self.setFavoritedImage()
         }
     }

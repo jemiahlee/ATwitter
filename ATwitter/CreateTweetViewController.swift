@@ -19,6 +19,7 @@ class CreateTweetViewController: UIViewController, UITextViewDelegate {
 
     override func viewDidLoad() {
         tweetTextView.delegate = self
+        tweetTextView.becomeFirstResponder()
 
         if let user = User.currentUser {
             screennameLabel.text = "@" + (user.screenname)!
@@ -34,10 +35,13 @@ class CreateTweetViewController: UIViewController, UITextViewDelegate {
         }
 
         if tweet != nil {
-            tweetTextView.text = "@\(tweet?.user?.screenname) "
+            tweetTextView.text = "@\((tweet?.user?.screenname)!) "
         }
 
         updateTwitterCharacterCount()
+    }
+
+    @IBAction func sendTweet(sender: AnyObject) {
     }
 
     func textViewDidChange(textView: UITextView) {

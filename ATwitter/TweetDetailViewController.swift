@@ -24,18 +24,11 @@ class TweetDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         navigationController?.navigationBarHidden = false
-        /* self.title = "ATwitter"
-
-        if let navigationBar = navigationController?.navigationBar {
-            print("Got into the navigationBar block")
-            navigationBar.tintColor = UIColor.blueColor()
-        } */
 
         screennameLabel.text = "@\((tweet?.user?.screenname)!)"
         nameLabel.text = tweet?.user?.name
-        favoriteCountLabel.text = "\((tweet?.favoriteCount)!)"
-        retweetCountLabel.text = "\((tweet?.retweetCount)!)"
         tweetTextLabel.text = tweet?.text
+        updateFields()
 
         let avatarImageRequest = NSURLRequest(URL: (tweet?.user?.profileImageURL)!)
         avatarImageView.setImageWithURLRequest(avatarImageRequest, placeholderImage: nil,
@@ -50,11 +43,42 @@ class TweetDetailViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let backButton = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: nil)
         self.navigationItem.backBarButtonItem = backButton;
+
+        let vc = segue.destinationViewController as! CreateTweetViewController
+        vc.tweet = tweet
     }
 
 
+    @IBAction func replyClick(sender: AnyObject) {
+        performSegueWithIdentifier("toReplySegue", sender: self)
+    }
+
+    @IBAction func retweetClick(sender: AnyObject) {
+    }
+
+    @IBAction func favoriteClick(sender: AnyObject) {
+    }
 
 
+    func updateFields() {
+        favoriteCountLabel.text = "\((tweet?.favoriteCount)!)"
+        retweetCountLabel.text = "\((tweet?.retweetCount)!)"
 
+        if tweet != nil {
+            if tweet!.favoriteCount == 1 {
+                favoriteLabel.text = "FAVORITE"
+            }
+            else {
+                favoriteLabel.text = "FAVORITES"
+            }
+
+            if tweet!.retweetCount == 1 {
+                retweetsLabel.text = "RETWEET"
+            }
+            else {
+                retweetsLabel.text = "RETWEETS"
+            }
+        }
+    }
 
 }

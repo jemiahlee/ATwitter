@@ -20,6 +20,7 @@ class Tweet: NSObject {
     var createdAt: NSDate?
     var dictionary: JSON?
     var isFavorited = false
+    var isRetweeted = false
     var favoriteCount: Int?
     var retweetCount: Int?
 
@@ -30,6 +31,7 @@ class Tweet: NSObject {
         user = User(dictionary: dictionary["user"])
         text = dictionary["text"].stringValue
         isFavorited = dictionary["favorited"].boolValue
+        isRetweeted = dictionary["retweeted"].boolValue
         favoriteCount = dictionary["favorite_count"].intValue
         retweetCount = dictionary["retweet_count"].intValue
         createdAtString = dictionary["created_at"].stringValue
@@ -48,7 +50,6 @@ class Tweet: NSObject {
         TwitterClient.sharedInstance.setTweetFavorite(self.id!, favorited: !self.isFavorited) { (updatedTweet: Tweet?, error: NSError?) -> Void in
             if updatedTweet != nil {
                 self.isFavorited = (updatedTweet?.isFavorited)!
-                print("Setting Tweet.isFavorited to \(self.isFavorited)")
             }
         }
         completion()
