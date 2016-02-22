@@ -42,7 +42,9 @@ class TweetCell: UITableViewCell {
             }
 
             if (tweet?.isRetweeted)! {
-                
+                retweetButton.setImage(UIImage(named: "retweet-action-on.png"), forState: .Normal)
+            } else {
+                retweetButton.setImage(UIImage(named: "retweet-action-inactive.png"), forState: .Normal)
             }
         }
     }
@@ -55,10 +57,22 @@ class TweetCell: UITableViewCell {
         }
     }
 
+    func setRetweetedImage() {
+        if (tweet?.isRetweeted)! {
+            retweetButton.setImage(UIImage(named: "retweet-action-inactive.png"), forState: .Normal)
+        } else {
+            retweetButton.setImage(UIImage(named: "retweet-action-on.png"), forState: .Normal)
+        }
+    }
+
     @IBAction func replyToTweet(sender: AnyObject) {
+            // performSegueWithIdentifier("toCreateTweetDetailSegue", sender: self)
     }
 
     @IBAction func retweetTweet(sender: AnyObject) {
+        tweet!.invertRetweet() { () -> Void in
+            self.setRetweetedImage()
+        }
     }
 
     @IBAction func favoriteTweet(sender: AnyObject) {

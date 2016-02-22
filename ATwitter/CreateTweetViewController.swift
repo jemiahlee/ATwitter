@@ -10,6 +10,7 @@ import UIKit
 
 class CreateTweetViewController: UIViewController, UITextViewDelegate {
     var tweet: Tweet?
+    var createdTweet: Tweet?
 
     @IBOutlet weak var charactersLeftLabel: UILabel!
     @IBOutlet weak var tweetTextView: UITextView!
@@ -42,6 +43,27 @@ class CreateTweetViewController: UIViewController, UITextViewDelegate {
     }
 
     @IBAction func sendTweet(sender: AnyObject) {
+        var replyId: Int? = nil
+        if tweet != nil {
+            replyId = (tweet?.id)!
+        }
+
+        TwitterClient.sharedInstance.tweet(tweetTextView.text, inReplyToStatusId: replyId,
+            completion: { (tweet: Tweet?, error: NSError?) -> Void in
+                if tweet != nil {
+                    self.createdTweet = tweet
+                    self.performSegueWithIdentifier("toTweetListController", sender: self)
+                }
+                else {
+                    //show error here
+                }
+            }
+        )
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let vc = segue.destinationViewController as! TweetsViewController
+        vc.sentTweet = tweet
     }
 
     func textViewDidChange(textView: UITextView) {

@@ -85,6 +85,41 @@ class TwitterClient: BDBOAuth1SessionManager {
         )
     }
 
+    func retweet(tweet: Tweet, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        var retweet_url = "1.1/statuses/retweet/\((tweet.id)!).json"
 
-    
+        if tweet.isRetweeted {
+            retweet_url = "1.1/statuses/unretweet/\((tweet.id)!).json"
+        }
+
+        let id: Int = (tweet.id)!
+        self.POST(retweet_url, parameters: ["id": id],
+            success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                let tweet = Tweet(dictionary: JSON(response!))
+                completion(tweet: tweet, error: nil)
+            },
+            failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
+                completion(tweet: nil, error: error)
+            }
+        )
+    }
+
+    func tweet(message: String, inReplyToStatusId: Int?, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        let tweet_url = "1.1/statuses/update.json"
+
+        var parameters = ["status": message]
+        if let replyId: Int = inReplyToStatusId {
+            parameters["in_reply_to_status_id"] = "\(replyId)"
+        }
+
+        self.POST(tweet_url, parameters: parameters,
+            success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                let tweet = Tweet(dictionary: JSON(response!))
+                completion(tweet: tweet, error: nil)
+            },
+            failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
+                completion(tweet: nil, error: error)
+            }
+        )
+    }
 }

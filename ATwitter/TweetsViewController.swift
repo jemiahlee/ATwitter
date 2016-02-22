@@ -12,6 +12,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     var tweets: [Tweet]?
     var refreshControl: UIRefreshControl!
+    var sentTweet: Tweet?
 
     @IBOutlet weak var tweetTable: UITableView!
 
@@ -27,6 +28,14 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tweetTable.insertSubview(refreshControl, atIndex: 0)
 
         refreshData(self)
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        if sentTweet != nil {
+            tweets?.insert(sentTweet!, atIndex: 0)
+        }
+        sentTweet = nil // shouldn't need this anymore.
+        tweetTable.reloadData()
     }
 
     func refreshData(sender: AnyObject) {
@@ -52,7 +61,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let backButton = UIBarButtonItem(title: "Back", style: .Bordered, target: self, action: "refreshData:")
+        let backButton = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "refreshData:")
         self.navigationItem.backBarButtonItem = backButton;
 
         if segue.identifier == "toTweetDetailSegue" {

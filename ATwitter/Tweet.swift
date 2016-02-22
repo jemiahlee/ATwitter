@@ -21,8 +21,8 @@ class Tweet: NSObject {
     var dictionary: JSON?
     var isFavorited = false
     var isRetweeted = false
-    var favoriteCount: Int?
-    var retweetCount: Int?
+    var favoriteCount = 0
+    var retweetCount = 0
 
     init(dictionary: JSON) {
         self.dictionary = dictionary
@@ -50,8 +50,29 @@ class Tweet: NSObject {
         TwitterClient.sharedInstance.setTweetFavorite(self.id!, favorited: !self.isFavorited) { (updatedTweet: Tweet?, error: NSError?) -> Void in
             if updatedTweet != nil {
                 self.isFavorited = (updatedTweet?.isFavorited)!
+                if self.isFavorited {
+                    self.favoriteCount += 1
+                }
+                else {
+                    self.favoriteCount -= 1
+                }
             }
         }
+        completion()
+    }
+
+    func invertRetweet(completion: () -> ()) {
+        TwitterClient.sharedInstance.retweet(self, completion: { (newTweet: Tweet?, error: NSError?) -> Void in
+            if newTweet != nil {
+                self.isRetweeted = !self.isRetweeted
+                if self.isRetweeted {
+                    self.retweetCount += 1
+                }
+                else {
+                    self.retweetCount -= 1
+                }
+            }
+        })
         completion()
     }
     
