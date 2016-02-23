@@ -36,34 +36,24 @@ class TweetCell: UITableViewCell {
                 }
             )
             ageLabel.text = tweet?.age()
-
-            if (tweet?.isFavorited)! {
-                favoriteButton.setImage(UIImage(named: "like-action-on.png"), forState: .Normal)
-            } else {
-                favoriteButton.setImage(UIImage(named: "like-action.png"), forState: .Normal)
-            }
-
-            if (tweet?.isRetweeted)! {
-                retweetButton.setImage(UIImage(named: "retweet-action-on.png"), forState: .Normal)
-            } else {
-                retweetButton.setImage(UIImage(named: "retweet-action-inactive.png"), forState: .Normal)
-            }
+            setFavoritedImage()
+            setRetweetedImage()
         }
     }
 
     func setFavoritedImage() {
         if (tweet?.isFavorited)! {
-            favoriteButton.setImage(UIImage(named: "like-action.png"), forState: .Normal)
-        } else {
             favoriteButton.setImage(UIImage(named: "like-action-on.png"), forState: .Normal)
+        } else {
+            favoriteButton.setImage(UIImage(named: "like-action.png"), forState: .Normal)
         }
     }
 
     func setRetweetedImage() {
         if (tweet?.isRetweeted)! {
-            retweetButton.setImage(UIImage(named: "retweet-action-inactive.png"), forState: .Normal)
-        } else {
             retweetButton.setImage(UIImage(named: "retweet-action-on.png"), forState: .Normal)
+        } else {
+            retweetButton.setImage(UIImage(named: "retweet-action-inactive.png"), forState: .Normal)
         }
     }
 

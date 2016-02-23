@@ -57,8 +57,8 @@ class Tweet: NSObject {
                     self.favoriteCount -= 1
                 }
             }
+            completion()
         }
-        completion()
     }
 
     func invertRetweet(completion: () -> ()) {
