@@ -19,15 +19,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29O-GA-7mx">
-                                <rect key="frame" x="197" y="176" width="206" height="41"/>
+                                <rect key="frame" x="197" y="279" width="206" height="41"/>
                                 <color key="backgroundColor" red="0.44512642299999999" green="0.80545886889999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="206" id="LJc-sY-ZML"/>
                                     <constraint firstAttribute="height" constant="41" id="fMM-ky-9hA"/>
-                                    <constraint firstAttribute="width" constant="206" id="qUy-CD-NGH"/>
+                                    <constraint firstAttribute="height" constant="41" id="oRB-Fm-YHO"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="41" id="xSB-CR-X4a"/>
                                 </constraints>
                                 <state key="normal" title="Login with Twitter">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="fMM-ky-9hA"/>
+                                        <exclude reference="xSB-CR-X4a"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="onLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R5h-tv-jhi"/>
                                 </connections>
@@ -35,11 +43,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" relation="lessThanOrEqual" secondItem="29O-GA-7mx" secondAttribute="bottom" constant="383" id="Fcu-pF-oeI"/>
-                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="29O-GA-7mx" secondAttribute="trailing" constant="197" id="PQm-0x-HfG"/>
-                            <constraint firstItem="29O-GA-7mx" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="156" id="c2i-Cj-mWy"/>
-                            <constraint firstItem="29O-GA-7mx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="197" id="eEz-df-2oj"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="29O-GA-7mx" secondAttribute="trailing" constant="197" id="PQm-0x-HfG"/>
+                            <constraint firstItem="29O-GA-7mx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Pf4-Rf-5ff"/>
+                            <constraint firstItem="29O-GA-7mx" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="sxM-KR-tde"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="PQm-0x-HfG"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <segue destination="fzx-Fw-FNH" kind="show" identifier="loginSegue" id="ao6-EK-FnL"/>
@@ -66,7 +78,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TweetCell" rowHeight="159" id="SQO-JO-tqv" customClass="TweetCell" customModule="ATwitter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="159"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="159"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SQO-JO-tqv" id="RId-re-sqE">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="158"/>
@@ -232,6 +244,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="newTweetButton" destination="NsT-BY-eNV" id="2ZQ-y0-ZuR"/>
                         <outlet property="tweetTable" destination="ajI-kp-TG9" id="qeM-FB-ORP"/>
                     </connections>
                 </viewController>
@@ -361,7 +374,6 @@
                         <outlet property="nameLabel" destination="vEx-i6-wot" id="Gz0-1g-4ru"/>
                         <outlet property="screennameLabel" destination="ARZ-f1-aco" id="C5F-lY-qum"/>
                         <outlet property="tweetTextView" destination="VVb-QM-AEP" id="i6z-Xm-44Z"/>
-                        <segue destination="AFg-n2-30M" kind="show" identifier="toTweetListController" id="S21-vW-fmL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NEM-kT-QFd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -656,7 +668,6 @@
         <image name="retweet-action-inactive.png" width="75" height="72"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="S21-vW-fmL"/>
-        <segue reference="g3S-nu-PwC"/>
+        <segue reference="mTE-Qm-6vK"/>
     </inferredMetricsTieBreakers>
 </document>

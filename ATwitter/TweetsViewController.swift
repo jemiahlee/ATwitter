@@ -15,6 +15,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var sentTweet: Tweet?
 
     @IBOutlet weak var tweetTable: UITableView!
+    @IBOutlet weak var newTweetButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         tweetTable.delegate = self
@@ -72,8 +73,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         else if segue.identifier == "toCreateTweetDetailSegue" {
             let vc = segue.destinationViewController as! CreateTweetViewController
-            let indexPath = tweetTable.indexPathForCell(sender as! UITableViewCell)
-            vc.tweet = tweets![indexPath!.row]
+            if let cell = sender as? UITableViewCell {
+                let indexPath = tweetTable.indexPathForCell(cell)
+                vc.tweet = tweets![indexPath!.row]
+            }
         }
     }
 

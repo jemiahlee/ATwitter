@@ -52,7 +52,7 @@ class CreateTweetViewController: UIViewController, UITextViewDelegate {
             completion: { (tweet: Tweet?, error: NSError?) -> Void in
                 if tweet != nil {
                     self.createdTweet = tweet
-                    self.performSegueWithIdentifier("toTweetListController", sender: self)
+                    self.navigationController?.popToRootViewControllerAnimated(true)
                 }
                 else {
                     //show error here
