@@ -13,6 +13,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var tweets: [Tweet]?
     var refreshControl: UIRefreshControl!
     var sentTweet: Tweet?
+    var user: User?
 
     @IBOutlet weak var tweetTable: UITableView!
     @IBOutlet weak var newTweetButton: UIBarButtonItem!
@@ -34,9 +35,14 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidAppear(animated: Bool) {
         if sentTweet != nil {
             tweets?.insert(sentTweet!, atIndex: 0)
+            sentTweet = nil // shouldn't need this anymore.
         }
-        sentTweet = nil // shouldn't need this anymore.
         tweetTable.reloadData()
+        print("called viewDidAppear")
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        print("Called viewWillAppear")
     }
 
     func refreshData(sender: AnyObject) {

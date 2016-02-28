@@ -30,6 +30,13 @@ class ProfileViewController: UIViewController {
             formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
             followingCountLabel.text = formatter.stringFromNumber((user.followingCount)!)!
             followerCountLabel.text = formatter.stringFromNumber((user.followerCount)!)!
+
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let tweetsViewController = storyBoard.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
+            self.addChildViewController(tweetsViewController)
+            tweetsViewController.willMoveToParentViewController(self)
+            tweetsView.addSubview(tweetsViewController.view)
+            tweetsViewController.didMoveToParentViewController(self)
         }
     }
 }
