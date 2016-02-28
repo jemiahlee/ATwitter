@@ -20,7 +20,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var replyButton: UIButton!
 
-    var controller: TweetsViewController?
+    var controller: UIViewController?
 
     var tweet: Tweet? {
         didSet {
@@ -38,7 +38,21 @@ class TweetCell: UITableViewCell {
             ageLabel.text = tweet?.age()
             setFavoritedImage()
             setRetweetedImage()
+
+            nameLabel.userInteractionEnabled = true
+            let tgr = UITapGestureRecognizer(target: self, action: "onNameTap:")
+            nameLabel.addGestureRecognizer(tgr)
         }
+    }
+
+    func onNameTap(sender: UILabel){
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let profileViewController = storyBoard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        profileViewController.user = tweet?.user
+        controller!.navigationController?.pushViewController(profileViewController, animated: true)
+        
+//        presentViewController(profileViewController, animated:true, completion:nil)
+
     }
 
     func setFavoritedImage() {

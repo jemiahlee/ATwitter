@@ -20,6 +20,8 @@ class User: NSObject {
     var profileImageURL: NSURL?
     var tagline: String?
     var dictionary: JSON?
+    var followerCount: Int?
+    var followingCount: Int?
 
     init(dictionary: JSON) {
         self.dictionary = dictionary
@@ -27,6 +29,8 @@ class User: NSObject {
         name = dictionary["name"].stringValue
         screenname = dictionary["screen_name"].stringValue
         profileImageURL = NSURL(string: dictionary["profile_image_url"].stringValue)!
+        followingCount = dictionary["friends_count"].intValue
+        followerCount = dictionary["followers_count"].intValue
         tagline = dictionary["description"].stringValue
     }
 

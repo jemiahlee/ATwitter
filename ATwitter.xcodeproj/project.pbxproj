@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		451FAA8C1C83A40F007EE6B6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FAA8B1C83A40F007EE6B6 /* ProfileViewController.swift */; };
 		454A9F851C7AE53800C26FF1 /* retweet-action-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 454A9F841C7AE53800C26FF1 /* retweet-action-on.png */; };
 		456EC1E41C7A9275005F9B96 /* CreateTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456EC1E31C7A9275005F9B96 /* CreateTweetViewController.swift */; };
 		458A5A5A1C79301100CC3F27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458A5A591C79301100CC3F27 /* AppDelegate.swift */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		20DD0B53A80F29DF3BE6C6C6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3EA5E31DF62C1EF1E65C7890 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		451FAA8B1C83A40F007EE6B6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		454A9F841C7AE53800C26FF1 /* retweet-action-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "retweet-action-on.png"; path = "../../../Downloads/retweet-action-on.png"; sourceTree = "<group>"; };
 		456EC1E31C7A9275005F9B96 /* CreateTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTweetViewController.swift; sourceTree = "<group>"; };
 		458A5A561C79301100CC3F27 /* ATwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ATwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +111,7 @@
 				458A5A761C7975EC00CC3F27 /* TweetsViewController.swift */,
 				458A5A881C7A76EE00CC3F27 /* TweetDetailViewController.swift */,
 				456EC1E31C7A9275005F9B96 /* CreateTweetViewController.swift */,
+				451FAA8B1C83A40F007EE6B6 /* ProfileViewController.swift */,
 			);
 			path = ATwitter;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			files = (
 				458A5A5C1C79301100CC3F27 /* ViewController.swift in Sources */,
 				458A5A7A1C7987A000CC3F27 /* TweetCell.swift in Sources */,
+				451FAA8C1C83A40F007EE6B6 /* ProfileViewController.swift in Sources */,
 				458A5A701C79334C00CC3F27 /* TwitterClient.swift in Sources */,
 				458A5A771C7975EC00CC3F27 /* TweetsViewController.swift in Sources */,
 				456EC1E41C7A9275005F9B96 /* CreateTweetViewController.swift in Sources */,
