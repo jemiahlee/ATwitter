@@ -46,6 +46,7 @@ Here's a walkthrough of implemented user stories:
 ![](jemiahlee_week4_walkthrough.gif)
 ![](jemiahlee_week4_walkthrough2.gif)
 ![](jemiahlee_week4_walkthrough3.gif)
+![](jemiahlee_week4_walkthrough4.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
