@@ -99,4 +99,13 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func onLogout(sender: AnyObject) {
         User.currentUser?.logout()
     }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let detailsViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TweetDetailViewController") as! TweetDetailViewController
+
+        let tweet = tweets![indexPath.row]
+        detailsViewController.tweet = tweet
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.navigationController?.pushViewController(detailsViewController, animated: true)
+    }
 }

@@ -21,6 +21,14 @@ class ProfileViewController: UIViewController {
     var user: User!
 
     override func viewDidLoad() {
+        if user == nil {
+            user = User.currentUser
+        }
+
+        if user == User.currentUser {
+            navigationController?.navigationBar.hidden = true
+        }
+
         if user != nil {
             nameLabel.text = user.name!
             screennameLabel.text = "@\((user.screenname)!)"
@@ -41,5 +49,10 @@ class ProfileViewController: UIViewController {
             tweetsView.addSubview(tweetsViewController.view)
             tweetsViewController.didMoveToParentViewController(self)
         }
+    }
+
+
+    override func viewDidDisappear(animated: Bool) {
+        navigationController?.navigationBar.hidden = false
     }
 }

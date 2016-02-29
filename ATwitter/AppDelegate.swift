@@ -26,8 +26,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //let vc = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as UIViewController
             //window?.rootViewController = vc
 
-            let vc = storyboard.instantiateViewControllerWithIdentifier("TweetNavigationController") as! UINavigationController
-            window?.rootViewController = vc
+            //let vc = storyboard.instantiateViewControllerWithIdentifier("TweetNavigationController") as! UINavigationController
+
+            let hamburgerViewController = storyboard.instantiateViewControllerWithIdentifier("HamburgerViewController") as! HamburgerViewController
+            let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+
+            menuViewController.hamburgerViewController = hamburgerViewController
+            hamburgerViewController.menuViewController = menuViewController
+            
+            window?.rootViewController = hamburgerViewController
         }
         return true
     }
