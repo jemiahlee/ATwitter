@@ -468,7 +468,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H5u-Gz-hGI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5547" y="-513"/>
+            <point key="canvasLocation" x="6359" y="-513"/>
         </scene>
         <!--Create Tweet View Controller-->
         <scene sceneID="HnA-tL-bX9">
@@ -876,6 +876,40 @@
             </objects>
             <point key="canvasLocation" x="3928" y="856"/>
         </scene>
+        <!--Mentions View Controller-->
+        <scene sceneID="FJ4-Gg-4Oc">
+            <objects>
+                <viewController storyboardIdentifier="MentionsViewController" id="sFc-H9-SGK" customClass="MentionsViewController" customModule="ATwitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="N6W-y5-D8f"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zc8-bh-3J8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Akx-BO-VEx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ssa-ol-uUV">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ssa-ol-uUV" firstAttribute="top" secondItem="Akx-BO-VEx" secondAttribute="top" constant="20" id="34v-8X-Nk5"/>
+                            <constraint firstAttribute="trailing" secondItem="Ssa-ol-uUV" secondAttribute="trailing" id="CEg-42-uWT"/>
+                            <constraint firstItem="Zc8-bh-3J8" firstAttribute="top" secondItem="Ssa-ol-uUV" secondAttribute="bottom" id="Jhz-n2-ll9"/>
+                            <constraint firstItem="Ssa-ol-uUV" firstAttribute="leading" secondItem="Akx-BO-VEx" secondAttribute="leading" id="MPo-mC-Lur"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="rNR-Wr-O2Q"/>
+                    <connections>
+                        <outlet property="mentionsView" destination="Ssa-ol-uUV" id="hTL-Z9-1nW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pCf-eq-y0g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4290" y="-858"/>
+        </scene>
         <!--Menu View Controller-->
         <scene sceneID="jBu-Qu-KUt">
             <objects>
@@ -1062,7 +1096,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K8n-l8-vYS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4735" y="-513"/>
+            <point key="canvasLocation" x="5547" y="-513"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="K34-Rb-iJS">
+            <objects>
+                <navigationController storyboardIdentifier="MentionsNavController" automaticallyAdjustsScrollViewInsets="NO" id="JTj-It-J3l" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jB3-HW-ULM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sFc-H9-SGK" kind="relationship" relationship="rootViewController" id="8fL-ec-c9E"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lHj-i9-bwb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3478" y="-858"/>
         </scene>
     </scenes>
     <resources>

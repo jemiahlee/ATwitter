@@ -65,4 +65,22 @@ class User: NSObject {
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
+
+    func getMentionTweets(completion: (tweets: [Tweet]?, error: NSError?) -> Void) {
+        TwitterClient.sharedInstance.getMentionsWithCompletion() { (tweets: [Tweet]?, error: NSError?) -> Void in
+            completion(tweets: tweets, error: nil)
+        }
+    }
+
+    func getTimelineTweets(completion: (tweets: [Tweet]?, error: NSError?) -> Void) {
+        TwitterClient.sharedInstance.homeTimelineWithCompletion() { (tweets: [Tweet]?, error: NSError?) -> Void in
+            completion(tweets: tweets, error: nil)
+        }
+    }
+
+    func getFeedTweets(completion: (tweets: [Tweet]?, error: NSError?) -> Void) {
+        TwitterClient.sharedInstance.getUserFeed(self) { (tweets: [Tweet]?, error: NSError?) -> Void in
+            completion(tweets: tweets, error: nil)
+        }
+    }
 }

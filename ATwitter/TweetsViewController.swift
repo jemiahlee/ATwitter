@@ -15,6 +15,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var sentTweet: Tweet?
     var user: User?              // tweetFunc: (() -> [Tweet]?)?
     var clickableNames = true
+    var mentions = false
 
     @IBOutlet weak var tweetTable: UITableView!
     @IBOutlet weak var newTweetButton: UIBarButtonItem!
@@ -34,31 +35,53 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     override func viewDidAppear(animated: Bool) {
+        print("got into viewDidAppear")
         if sentTweet != nil {
             tweets?.insert(sentTweet!, atIndex: 0)
             sentTweet = nil // shouldn't need this anymore.
+            tweetTable.reloadData()
         }
-        tweetTable.reloadData()
+        else {
+            refreshData(self)
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
-        // pass for now
     }
 
     func refreshData(sender: AnyObject) {
-        if user != nil {
-            TwitterClient.sharedInstance.getUserFeed(user!) { (tweets: [Tweet]?, error: NSError?) -> Void in
+        print("in refreshData, mentions is \(mentions)")
+        if user == nil {
+            if mentions {
+                User.currentUser!.getMentionTweets() { (tweets: [Tweet]?, error: NSError?) -> Void in
+                    self.tweets = tweets
+                    self.tweetTable.reloadData()
+                    self.refreshControl.endRefreshing()
+                }
+            }
+            else {
+                User.currentUser!.getTimelineTweets() { (tweets: [Tweet]?, error: NSError?) -> Void in
+                    self.tweets = tweets
+                    self.tweetTable.reloadData()
+                    self.refreshControl.endRefreshing()
+                }
+            }
+        }
+        else {
+        if mentions {
+            user!.getMentionTweets() { (tweets: [Tweet]?, error: NSError?) -> Void in
                 self.tweets = tweets
                 self.tweetTable.reloadData()
                 self.refreshControl.endRefreshing()
             }
         }
         else {
-            TwitterClient.sharedInstance.homeTimelineWithCompletion() { (tweets: [Tweet]?, error: NSError?) -> Void in
+            user!.getFeedTweets() { (tweets: [Tweet]?, error: NSError?) -> Void in
                 self.tweets = tweets
                 self.tweetTable.reloadData()
                 self.refreshControl.endRefreshing()
             }
+        }
         }
     }
 

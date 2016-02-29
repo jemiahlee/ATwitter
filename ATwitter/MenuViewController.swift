@@ -19,6 +19,7 @@ class MenuViewController: UITableViewController {
 
     var profileController: UIViewController!
     var homeTimelineController: UIViewController!
+    var myMentionsController: UIViewController!
 
     var hamburgerViewController: HamburgerViewController!
 
@@ -28,9 +29,11 @@ class MenuViewController: UITableViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         profileController = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationController")
         homeTimelineController = storyboard.instantiateViewControllerWithIdentifier("TweetNavigationController")
+        myMentionsController = storyboard.instantiateViewControllerWithIdentifier("MentionsNavController")
 
         viewControllers.append(profileController!)
         viewControllers.append(homeTimelineController!)
+        viewControllers.append(myMentionsController!)
 
         hamburgerViewController.contentViewController = homeTimelineController
 

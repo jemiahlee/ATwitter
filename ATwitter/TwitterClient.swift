@@ -36,6 +36,16 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
 
+    func getMentionsWithCompletion(completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+        self.GET("1.1/statuses/mentions_timeline.json", parameters: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let tweets = Tweet.tweetsFromJSON(JSON(response!))
+            completion(tweets: tweets, error: nil)
+            print(tweets[0].dictionary)
+            }, failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
+                completion(tweets: nil, error: error)
+        })
+    }
+
     func homeTimelineWithCompletion(completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
         self.GET("1.1/statuses/home_timeline.json", parameters: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
             let tweets = Tweet.tweetsFromJSON(JSON(response!))
@@ -45,7 +55,6 @@ class TwitterClient: BDBOAuth1SessionManager {
                 completion(tweets: nil, error: error)
         })
     }
-
 
     func loginWithCompletion(completion: (user: User?, error: NSError?) -> Void) {
         loginCompletion = completion
