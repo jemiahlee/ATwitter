@@ -35,6 +35,7 @@ class ProfileViewController: UIViewController {
             let tweetsViewController = storyBoard.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
             self.addChildViewController(tweetsViewController)
             tweetsViewController.willMoveToParentViewController(self)
+            tweetsViewController.view.frame = tweetsView.bounds
             tweetsView.addSubview(tweetsViewController.view)
             tweetsViewController.didMoveToParentViewController(self)
         }
