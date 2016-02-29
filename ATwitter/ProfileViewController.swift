@@ -51,7 +51,6 @@ class ProfileViewController: UIViewController {
         }
     }
 
-
     override func viewDidDisappear(animated: Bool) {
         navigationController?.navigationBar.hidden = false
     }
