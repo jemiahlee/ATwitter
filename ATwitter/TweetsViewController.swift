@@ -35,14 +35,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     override func viewDidAppear(animated: Bool) {
-        print("got into viewDidAppear")
         if sentTweet != nil {
             tweets?.insert(sentTweet!, atIndex: 0)
             sentTweet = nil // shouldn't need this anymore.
             tweetTable.reloadData()
-        }
-        else {
-            refreshData(self)
         }
     }
 
@@ -50,7 +46,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func refreshData(sender: AnyObject) {
-        print("in refreshData, mentions is \(mentions)")
         if user == nil {
             if mentions {
                 User.currentUser!.getMentionTweets() { (tweets: [Tweet]?, error: NSError?) -> Void in

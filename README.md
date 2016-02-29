@@ -1,6 +1,6 @@
 # Project 4 - *ATwitter Redux*
 
-Time spent: **X** hours spent in total
+Time spent: **10** hours spent in total
 
 ## User Stories
 
@@ -8,7 +8,7 @@ The following **required** functionality is completed:
 
 - [x] Hamburger menu
    - [x] Dragging anywhere in the view should reveal the menu.
-   - [ ] The menu should include links to your profile, the home timeline, and the mentions view.
+   - [x] The menu should include links to your profile, the home timeline, and the mentions view.
    - [x] The menu can look similar to the example or feel free to take liberty with the UI.
 - [x] Profile page
    - [x] Contains the user header view
@@ -44,6 +44,8 @@ Please list two areas of the assignment you'd like to **discuss further with you
 Here's a walkthrough of implemented user stories:
 
 ![](jemiahlee_week4_walkthrough.gif)
+![](jemiahlee_week4_walkthrough2.gif)
+![](jemiahlee_week4_walkthrough3.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
