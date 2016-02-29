@@ -13,7 +13,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var tweets: [Tweet]?
     var refreshControl: UIRefreshControl!
     var sentTweet: Tweet?
-    var user: User?
+    var user: User?              // tweetFunc: (() -> [Tweet]?)?
+    var clickableNames = true
 
     @IBOutlet weak var tweetTable: UITableView!
     @IBOutlet weak var newTweetButton: UIBarButtonItem!
@@ -38,18 +39,26 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             sentTweet = nil // shouldn't need this anymore.
         }
         tweetTable.reloadData()
-        print("called viewDidAppear")
     }
 
     override func viewWillAppear(animated: Bool) {
-        print("Called viewWillAppear")
+        // pass for now
     }
 
     func refreshData(sender: AnyObject) {
-        TwitterClient.sharedInstance.homeTimelineWithCompletion() { (tweets: [Tweet]?, error: NSError?) -> Void in
-            self.tweets = tweets
-            self.tweetTable.reloadData()
-            self.refreshControl.endRefreshing()
+        if user != nil {
+            TwitterClient.sharedInstance.getUserFeed(user!) { (tweets: [Tweet]?, error: NSError?) -> Void in
+                self.tweets = tweets
+                self.tweetTable.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
+        else {
+            TwitterClient.sharedInstance.homeTimelineWithCompletion() { (tweets: [Tweet]?, error: NSError?) -> Void in
+                self.tweets = tweets
+                self.tweetTable.reloadData()
+                self.refreshControl.endRefreshing()
+            }
         }
     }
 
@@ -63,6 +72,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
+        cell.clickableNames = clickableNames
         cell.tweet = tweets![indexPath.row]
         cell.controller = self
         return cell

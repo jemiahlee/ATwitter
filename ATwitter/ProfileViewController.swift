@@ -33,6 +33,8 @@ class ProfileViewController: UIViewController {
 
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let tweetsViewController = storyBoard.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
+            tweetsViewController.user = user
+            tweetsViewController.clickableNames = false
             self.addChildViewController(tweetsViewController)
             tweetsViewController.willMoveToParentViewController(self)
             tweetsViewController.view.frame = tweetsView.bounds

@@ -21,6 +21,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var replyButton: UIButton!
 
     var controller: UIViewController?
+    var clickableNames = true
 
     var tweet: Tweet? {
         didSet {
@@ -39,9 +40,11 @@ class TweetCell: UITableViewCell {
             setFavoritedImage()
             setRetweetedImage()
 
-            nameLabel.userInteractionEnabled = true
-            let tgr = UITapGestureRecognizer(target: self, action: "onNameTap:")
-            nameLabel.addGestureRecognizer(tgr)
+            if clickableNames {
+                nameLabel.userInteractionEnabled = true
+                let tgr = UITapGestureRecognizer(target: self, action: "onNameTap:")
+                nameLabel.addGestureRecognizer(tgr)
+            }
         }
     }
 
@@ -50,9 +53,6 @@ class TweetCell: UITableViewCell {
         let profileViewController = storyBoard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
         profileViewController.user = tweet?.user
         controller!.navigationController?.pushViewController(profileViewController, animated: true)
-        
-//        presentViewController(profileViewController, animated:true, completion:nil)
-
     }
 
     func setFavoritedImage() {
